@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Hero - كورس الاحتراف</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #bb86fc;
+            --secondary-text: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            object-fit: cover;
+        }
+
+        h1 { color: var(--accent-color); margin-bottom: 10px; }
+        p { color: var(--secondary-text); font-size: 1.1rem; line-height: 1.6; }
+
+        .ad-container {
+            background: #252525;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px dashed var(--accent-color);
+            border-radius: 10px;
+            min-height: 100px;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(187, 134, 252, 0.4);
+        }
+
+        #timer-box {
+            background: rgba(187, 134, 252, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        #timer {
+            font-weight: bold;
+            color: #ffb74d;
+            font-size: 1.3rem;
+        }
+
+        #channel-link { 
+            display: none; 
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="logo.png" alt="Zero Hero Logo" class="logo-img">
+        </div>
+
+        <h1>Zero Hero</h1>
+        <p>مرحباً بك. يرجى الانتظار قليلاً لمشاهدة الإعلان وتفعيل رابط القناة.</p>
+
+        <div class="ad-container">
+            <!-- ضع كود إعلان Adsterra هنا -->
+            <p style="font-size: 0.8rem;">[ إعلان Adsterra يظهر هنا ]</p>
+        </div>
+
+        <div id="status-area">
+            <div id="timer-box">
+                انتظر <span id="timer">30</span> ثانية...
+            </div>
+        </div>
+
+        <div id="channel-link">
+            <a href="https://t.me/zeroheroiq" class="btn">دخول قناة التليجرام</a>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 30;
+        const timerElement = document.getElementById('timer');
+        const statusArea = document.getElementById('status-area');
+        const channelLink = document.getElementById('channel-link');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerElement.innerText = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                statusArea.style.display = 'none';
+                channelLink.style.display = 'block';
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
