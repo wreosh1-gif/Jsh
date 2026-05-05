@@ -36,8 +36,20 @@
             text-align: center;
         }
 
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            object-fit: cover;
+        }
+
         h1 { color: var(--accent-color); margin-bottom: 10px; }
-        p { color: var(--secondary-text); font-size: 1.1rem; }
+        p { color: var(--secondary-text); font-size: 1.1rem; line-height: 1.6; }
 
         .ad-container {
             background: #252525;
@@ -52,73 +64,73 @@
             background-color: var(--accent-color);
             color: #000;
             border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
+            padding: 14px 30px;
+            font-size: 1.1rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
             text-decoration: none;
             display: inline-block;
             margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(187, 134, 252, 0.4);
         }
 
-        .btn:disabled {
-            background-color: #555;
-            cursor: not-allowed;
+        #timer-box {
+            background: rgba(187, 134, 252, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
         }
 
         #timer {
             font-weight: bold;
             color: #ffb74d;
+            font-size: 1.3rem;
         }
 
-        #channel-link { display: none; margin-top: 20px; }
+        #channel-link { 
+            display: none; 
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in;
+        }
 
-        .instruction {
-            font-size: 0.9rem;
-            color: #ff5252;
-            margin-top: 10px;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Zero Hero</h1>
-        <p>أهلاً بك في كورس الاحتراف. للدخول إلى القناة، يرجى دعمنا بمشاهدة الإعلان أدناه.</p>
+        <div class="logo-container">
+            <img src="logo.png" alt="Zero Hero Logo" class="logo-img">
+        </div>
 
-        <!-- مكان كود إعلان Adsterra -->
-        <div class="ad-container" id="ad-box">
+        <h1>Zero Hero</h1>
+        <p>مرحباً بك. يرجى الانتظار قليلاً لمشاهدة الإعلان وتفعيل رابط القناة.</p>
+
+        <div class="ad-container">
+            <!-- ضع كود إعلان Adsterra هنا -->
             <p style="font-size: 0.8rem;">[ إعلان Adsterra يظهر هنا ]</p>
-            <!-- الصق كود Adsterra Direct Link أو Banner هنا -->
-            <script type="text/javascript">
-                // ملاحظة: ضع كود الإعلان الخاص بك هنا
-            </script>
         </div>
 
         <div id="status-area">
-            <p>انتظر <span id="timer">30</span> ثانية لتفعيل الرابط...</p>
-            <p class="instruction">يجب الضغط على الإعلان لضمان تفعيل الزر</p>
+            <div id="timer-box">
+                انتظر <span id="timer">30</span> ثانية...
+            </div>
         </div>
 
         <div id="channel-link">
-            <a href="https://t.me/zeroheroiq" class="btn">دخول قناة التليجرام الآن</a>
+            <a href="https://t.me/zeroheroiq" class="btn">دخول قناة التليجرام</a>
         </div>
     </div>
 
     <script>
         let timeLeft = 30;
-        let timerElement = document.getElementById('timer');
-        let adBox = document.getElementById('ad-box');
-        let statusArea = document.getElementById('status-area');
-        let channelLink = document.getElementById('channel-link');
-        let clicked = false;
-
-        // تتبع الضغط على منطقة الإعلان
-        adBox.addEventListener('click', () => {
-            clicked = true;
-        });
+        const timerElement = document.getElementById('timer');
+        const statusArea = document.getElementById('status-area');
+        const channelLink = document.getElementById('channel-link');
 
         const countdown = setInterval(() => {
             timeLeft--;
@@ -126,21 +138,10 @@
 
             if (timeLeft <= 0) {
                 clearInterval(countdown);
-                if(clicked) {
-                    showLink();
-                } else {
-                    timerElement.innerText = "0";
-                    alert("يرجى الضغط على الإعلان أولاً لتفعيل الرابط!");
-                    // إعادة المحاولة إذا لم يضغط
-                    timeLeft = 5; 
-                }
+                statusArea.style.display = 'none';
+                channelLink.style.display = 'block';
             }
         }, 1000);
-
-        function showLink() {
-            statusArea.style.display = 'none';
-            channelLink.style.display = 'block';
-        }
     </script>
 
 </body>
